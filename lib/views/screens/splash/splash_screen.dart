@@ -66,13 +66,13 @@ class _SplashScreenState extends State<SplashScreen>
     return Container(
       width: context.mQuery.width,
       height: context.mQuery.height,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        image: AssetImage("$rootImageDir/splash_bg.png"),
-        fit: BoxFit.cover,
-      )),
+      // decoration: BoxDecoration(
+      //     image: DecorationImage(
+      //   // image: AssetImage("$rootImageDir/splash_bg.png"),
+      //   fit: BoxFit.cover,
+      // )),
       child: Scaffold(
-        backgroundColor: AppColors.mainColor.withOpacity(.3),
+        backgroundColor: AppColors.mainColor.withOpacity(.9),
         body: SizedBox(
           width: context.mQuery.width,
           height: context.mQuery.height,
@@ -104,14 +104,14 @@ class _SplashScreenState extends State<SplashScreen>
                   child: AnimatedTextKit(
                     animatedTexts: [
                       ColorizeAnimatedText(
-                        'Waiz',
+                        'airpero'.toUpperCase(),
                         speed: Duration(milliseconds: 500),
                         textStyle: context.t.titleLarge!.copyWith(
                             fontSize: 40.sp,
                             color: AppColors.blackColor,
                             fontFamily: Styles.secondaryFontFamily),
                         colors: [
-                          AppColors.mainColor,
+                          AppColors.secondaryColor,
                           AppColors.blackColor,
                         ],
                       ),

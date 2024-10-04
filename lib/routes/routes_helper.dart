@@ -1,3 +1,4 @@
+import 'package:waiz/resources/views/home/bills_payment/bills_payment.dart';
 import 'package:waiz/routes/page_index.dart';
 import '../views/screens/money_request/money_request_history_details_screen.dart';
 import '../views/screens/money_request/money_request_history_screen.dart';
@@ -117,6 +118,10 @@ class RouteHelper {
         GetPage(
             name: RoutesName.payoutHistoryScreen,
             page: () => PayoutHistoryScreen(),
+            transition: Transition.fade),
+        GetPage(
+            name: RoutesName.billPayment,
+            page: () => BillsPaymentView(),
             transition: Transition.fade),
         GetPage(
             name: RoutesName.flutterWaveWithdrawScreen,

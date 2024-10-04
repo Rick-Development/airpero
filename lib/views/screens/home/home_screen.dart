@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:waiz/controllers/bindings/controller_index.dart';
+import 'package:waiz/resources/views/home/bills_payment/bills_payment.dart';
 import 'package:waiz/routes/routes_name.dart';
 import 'package:waiz/views/widgets/app_button.dart';
 import 'package:waiz/views/widgets/text_theme_extension.dart';
 import '../../../../config/app_colors.dart';
 import '../../../config/dimensions.dart';
 import '../../../config/styles.dart';
+import '../../../resources/widgets/usable_dashboard_slider.dart';
 import '../../../themes/themes.dart';
 import '../../../utils/app_constants.dart';
 import '../../../utils/services/helpers.dart';
@@ -142,6 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             ),
                                                           ),
                                                           HSpace(10.w),
+
                                                           Container(
                                                             height: 30.h,
                                                             width: 30.h,
@@ -596,6 +599,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             }),
                                       ),
                             VSpace(33.h),
+
+                            const UsableDashboardSlider(imagePaths: [
+                              'assets/images/img_3.png',
+                              'assets/images/dash_image.png',
+                              'assets/images/img_2.png',
+                            ]),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -1242,38 +1251,37 @@ class _HomeScreenState extends State<HomeScreen> {
                         trailing: Icon(Icons.arrow_forward_ios_rounded,
                             size: 14.h, color: AppColors.blackColor),
                       ),
-                      // ListTile(
-                      //   onTap: () {
-                      //     Get.toNamed(RoutesName.payoutScreen);
-                      //   },
-                      //   leading: Image.asset("$rootImageDir/payout.png",
-                      //       height: 20.h,
-                      //       width: 20.h,
-                      //       fit: BoxFit.cover,
-                      //       color: AppColors.blackColor),
-                      //   title: Text(storedLanguage['Payout'] ?? "Payout",
-                      //       style: context.t.displayMedium?.copyWith(
-                      //           fontSize: 18.sp, color: AppColors.blackColor)),
-                      //   trailing: Icon(Icons.arrow_forward_ios_rounded,
-                      //       size: 14.h, color: AppColors.blackColor),
-                      // ),
-                      // ListTile(
-                      //   onTap: () {
-                      //     Get.toNamed(RoutesName.payoutHistoryScreen);
-                      //   },
-                      //   leading: Image.asset("$rootImageDir/payout_history.png",
-                      //       height: 18.h,
-                      //       width: 18.h,
-                      //       fit: BoxFit.cover,
-                      //       color: AppColors.blackColor),
-                      //   title: Text(
-                      //       storedLanguage['Payout History'] ??
-                      //           "Payout History",
-                      //       style: context.t.displayMedium?.copyWith(
-                      //           fontSize: 18.sp, color: AppColors.blackColor)),
-                      //   trailing: Icon(Icons.arrow_forward_ios_rounded,
-                      //       size: 14.h, color: AppColors.blackColor),
-                      // ),
+                      ListTile(
+                        onTap: () {
+                          Get.toNamed(RoutesName.payoutScreen);
+                        },
+                        leading: Image.asset("$rootImageDir/payout.png",
+                            height: 20.h,
+                            width: 20.h,
+                            fit: BoxFit.cover,
+                            color: AppColors.blackColor),
+                        title: Text(storedLanguage['Payout'] ?? "Payout",
+                            style: context.t.displayMedium?.copyWith(
+                                fontSize: 18.sp, color: AppColors.blackColor)),
+                        trailing: Icon(Icons.arrow_forward_ios_rounded,
+                            size: 14.h, color: AppColors.blackColor),
+                      ),
+                      ListTile(
+                        onTap: () {
+                          Get.to(()=> BillsPaymentView());
+                        },
+                        leading: Image.asset("$rootImageDir/convert.png",
+                            height: 18.h,
+                            width: 18.h,
+                            fit: BoxFit.cover,
+                            color: AppColors.blackColor),
+                        title: Text(
+                            "Bill Payments",
+                            style: context.t.displayMedium?.copyWith(
+                                fontSize: 18.sp, color: AppColors.blackColor)),
+                        trailing: Icon(Icons.arrow_forward_ios_rounded,
+                            size: 14.h, color: AppColors.blackColor),
+                      ),
                       ListTile(
                         onTap: () {
                           Get.to(() => TransactionScreen(isFromHomePage: true));
@@ -1385,7 +1393,7 @@ class _HomeScreenState extends State<HomeScreen> {
       titleWidget: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Waiz",
+          Text("airpero".toUpperCase(),
               style: t.titleMedium?.copyWith(
                   fontSize: 32.sp,
                   fontWeight: FontWeight.w600,

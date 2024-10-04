@@ -1,8 +1,8 @@
 class AppConstants {
   static const String appName = 'Waiz';
 
-  //BASE_URL
-  static const String baseUrl = 'https://example.com/api'; // baseUrl/api
+  //BASE_URLhttps://airpero.com/
+  static const String baseUrl = 'https://airpero.com/api'; // baseUrl/api
 
   //END_POINTS_URL
   static const String registerUrl = '/register';

@@ -34,7 +34,6 @@ import 'package:path_provider_foundation/path_provider_foundation.dart';
 import 'package:shared_preferences_foundation/shared_preferences_foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:url_launcher_macos/url_launcher_macos.dart';
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 import 'package:file_selector_windows/file_selector_windows.dart';
 import 'package:image_picker_windows/image_picker_windows.dart';
 import 'package:open_file_windows/open_file_windows.dart';
@@ -299,15 +298,6 @@ class _PluginRegistrant {
       } catch (err) {
         print(
           '`url_launcher_macos` threw an error: $err. '
-          'The app may not function as expected until you remove this plugin from pubspec.yaml'
-        );
-      }
-
-      try {
-        WebKitWebViewPlatform.registerWith();
-      } catch (err) {
-        print(
-          '`webview_flutter_wkwebview` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
       }

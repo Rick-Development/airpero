@@ -1,0 +1,1 @@
+ /Users/macintoshhd/StudioProjects/waiz2/.dart_tool/flutter_build/06c03b506225ee2ff3df025ff6df1c7c/native_assets.yaml: 

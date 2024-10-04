@@ -40,6 +40,7 @@ class RoutesName {
   static String payoutScreen = "/payoutScreen";
   static String payoutPreviewScreen = "/payoutPreviewScreen";
   static String payoutHistoryScreen = "/payoutHistoryScreen";
+  static String billPayment = "/billPayment";
   static String flutterWaveWithdrawScreen = "/flutterWaveWithdrawScreen";
   static String manualPaymentScreen = "/manualPaymentScreen";
   static String referScreen = "/referScreen";
