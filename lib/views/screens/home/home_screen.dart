@@ -3,11 +3,14 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:waiz/controllers/bindings/controller_index.dart';
 import 'package:waiz/resources/views/home/bills_payment/bills_payment.dart';
 import 'package:waiz/routes/routes_name.dart';
 import 'package:waiz/views/widgets/app_button.dart';
 import 'package:waiz/views/widgets/text_theme_extension.dart';
+import 'package:waiz/views/widgets/usable_bootom_sheet.dart';
 import '../../../../config/app_colors.dart';
 import '../../../config/dimensions.dart';
 import '../../../config/styles.dart';
@@ -71,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             VSpace(15.h),
-                            Text(storedLanguage['Accounts'] ?? 'Accounts',
+                            Text(storedLanguage['Accounts'] ?? 'Your Balances',
                                 style: t.bodyLarge?.copyWith(fontSize: 20.sp)),
                             VSpace(20.h),
                             walletCtrl.isLoading
@@ -183,6 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               return [
                                                                 PopupMenuItem(
                                                                     onTap: () {
+                                                                      UsableBootomSheet();
                                                                       walletCtrl.walletUUID = data
                                                                           .uuid
                                                                           .toString();
@@ -599,7 +603,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                             }),
                                       ),
                             VSpace(33.h),
-
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                essentialWidget(
+                                  context,
+                                  icon: Icons.phone_android, // Replace with relevant icon
+                                  title: 'Airtime',
+                                ),
+                                essentialWidget(
+                                  context,
+                                  icon: Icons.data_usage, // Replace with a custom icon or asset
+                                  title: 'Data',
+                                ),
+                                essentialWidget(
+                                  context,
+                                  icon: Icons.receipt, // Replace with a custom icon or asset for TV
+                                  title: 'Pay Bills',
+                                ),
+                                essentialWidget(
+                                  context,
+                                  icon: Icons.sports_soccer, // Replace with a custom icon or asset for betting
+                                  title: 'Betting',
+                                ),
+                              ],
+                            ),
+                            VSpace(33.h),
                             const UsableDashboardSlider(imagePaths: [
                               'assets/images/img_3.png',
                               'assets/images/dash_image.png',
@@ -1479,6 +1508,46 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+Widget essentialWidget(BuildContext context,
+    {required dynamic icon, required String title, VoidCallback? onTap}) =>
+    InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+        // width: 45,
+        // decoration: BoxDecoration(
+        //   color: Colors.white,
+        //   boxShadow: [
+        //     BoxShadow(
+        //       spreadRadius: 2,
+        //       color: Colors.black.withOpacity(.2),
+        //     ),
+        //   ],
+        //   borderRadius: BorderRadius.circular(8),
+        // ),
+        child: Column(
+          children: [
+            // SvgPicture.asset('assets/svgs/$svg.svg'),
+            Icon(icon,
+
+            ),
+            const Gap(8),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+                color: Theme.of(context).textTheme.labelLarge?.color,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+
+
 
 Widget buildTransactionLoader(
     {int? itemCount = 8, bool? isReverseColor = false}) {

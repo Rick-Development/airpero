@@ -186,7 +186,7 @@ class AddRecipientsScreen extends StatelessWidget {
                                             isScrollable: true,
                                             tabAlignment: TabAlignment.start,
                                             overlayColor:
-                                                WidgetStatePropertyAll(
+                                            MaterialStatePropertyAll(
                                                     Colors.transparent),
                                             tabs: List.generate(
                                                 addRecipientCtrl.serviceList

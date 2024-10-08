@@ -39,23 +39,24 @@ class AuthController extends GetxController {
     });
     isLoading = false;
     update();
-    Get.offAllNamed(RoutesName.bottomNavBar);
-    // var data = jsonDecode(response.body);
+    // Get.offAllNamed(RoutesName.bottomNavBar);
+    var data = jsonDecode(response.body);
+
     if (response.statusCode == 200) {
-      // if (data['status'] == 'success') {
-      //   // ApiStatus.checkStatus(data['status'], data['message']['message']);
-      //   if (isRemember == true) {
-      //     HiveHelp.write(Keys.userName, userNameVal);
-      //     HiveHelp.write(Keys.userPass, singInPassVal);
-      //   }
-      //   // HiveHelp.write(Keys.token, data['message']['token']);
+      if (data['status'] == 'success') {
+        ApiStatus.checkStatus(data['status'], data['message']['message']);
+        if (isRemember == true) {
+          HiveHelp.write(Keys.userName, userNameVal);
+          HiveHelp.write(Keys.userPass, singInPassVal);
+        }
+        HiveHelp.write(Keys.token, data['message']['token']);
         Get.offAllNamed(RoutesName.bottomNavBar);
-      //   clearSignInController();
-      // } else {
-      //   // ApiStatus.checkStatus(data['status'], data['message']);
-      // }
+        clearSignInController();
+      } else {
+        ApiStatus.checkStatus(data['status'], data['message']);
+      }
     } else {
-      // Helpers.showSnackBar(msg: '${data['message']}');
+      Helpers.showSnackBar(msg: '${data['message']}');
     }
   }
 

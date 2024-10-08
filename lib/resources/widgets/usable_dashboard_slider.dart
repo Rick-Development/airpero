@@ -54,7 +54,7 @@ class _UsableDashboardSliderState extends State<UsableDashboardSlider> {
     return Column(
       children: [
         SizedBox(
-          height: 100, // Fixed height for the slider
+          height: 150, // Fixed height for the slider
           child: PageView.builder(
             controller: _pageController,
             onPageChanged: (index) {

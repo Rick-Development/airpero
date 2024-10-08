@@ -178,14 +178,14 @@ class LoginScreen extends StatelessWidget {
                                     ? AppColors.blackColor
                                     : AppColors.whiteColor),
                         isLoading: controller.isLoading ? true : false,
-                        bgColor: !controller.userNameVal.isEmpty ||
-                                !controller.singInPassVal.isEmpty
+                        bgColor: controller.userNameVal.isEmpty ||
+                                controller.singInPassVal.isEmpty
                             ? AppThemes.getInactiveColor()
                             : Get.isDarkMode
                                 ? AppColors.mainColor
                                 : AppColors.blackColor,
-                        onTap: !controller.userNameVal.isEmpty ||
-                                !controller.singInPassVal.isEmpty
+                        onTap: controller.userNameVal.isEmpty ||
+                                controller.singInPassVal.isEmpty
                             ? null
                             : controller.isLoading
                                 ? null
