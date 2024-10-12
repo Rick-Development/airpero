@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     final sessionConfig = SessionConfig(
-        invalidateSessionForAppLostFocus: const Duration(minutes: 5),
-        invalidateSessionForUserInactivity: const Duration(minutes: 5));
+        invalidateSessionForAppLostFocus: const Duration(minutes: 100),
+        invalidateSessionForUserInactivity: const Duration(minutes: 100));
 
     sessionConfig.stream.listen((SessionTimeoutState timeoutEvent) {
       if (timeoutEvent == SessionTimeoutState.userInactivityTimeout) {

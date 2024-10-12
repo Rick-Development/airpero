@@ -765,6 +765,41 @@
             </list>
           </value>
         </entry>
+        <entry key="local_auth">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth-2.1.8/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="local_auth_android">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_android-1.0.38/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="local_auth_ios">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_ios-1.1.6/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="local_auth_platform_interface">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_platform_interface-1.0.10/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="local_auth_windows">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_windows-1.0.11/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="local_session_timeout">
           <value>
             <list>
@@ -1754,6 +1789,11 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/lecle_downloads_path_provider-0.0.2+8/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/loading_animation_widget-1.2.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/loading_indicator-3.1.1/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth-2.1.8/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_android-1.0.38/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_ios-1.1.6/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_platform_interface-1.0.10/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_windows-1.0.11/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/local_session_timeout-2.3.2/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/logger-2.4.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.2.0/lib" />

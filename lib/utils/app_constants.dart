@@ -4,6 +4,12 @@ class AppConstants {
   //BASE_URLhttps://airpero.com/
   static const String baseUrl = 'https://me.airpero.com/api'; // baseUrl/api
 
+  //test
+  static const String baseUrlBridgeCard = 'https://issuecards.api.bridgecard.co/v1/issuing/sandbox'; // baseUrl/api
+
+  //production
+  // static const String baseUrlBridgeCard = 'http://issuecards.api.bridgecard.co/v1/issuing';
+
   //END_POINTS_URL
   static const String registerUrl = '/register';
   static const String loginUrl = '/login';
@@ -41,6 +47,25 @@ class AppConstants {
   static const String cardOrderFormReSubmit = "/virtual-card/order/re-submit";
   static const String cardOrderConfirm = "/virtual-card/confirm";
   static const String cardTransaction = "/virtual-card/transaction";
+
+
+  //----virtual Bridge cards
+  static const String cardHolderRegister = "/cardholder/register_cardholder_synchronous";
+  static const String virtualCardRegister = "/cards/create_card";
+  static const String virtualCardDetails = "cards/get_card_details";
+  static const String getVirtualCardBalance = "/get_card_balance?card_id=";
+  static const String addVirtualCardBalance = "/cards/fund_card_asynchronously";
+  static const String unloadVirtualCardBalance = "/cards/unload_card_asynchronously";
+  static const String mockDebitVirtualCardBalance = "/cards/mock_debit_transaction";
+  static const String freezeVirtualCardBalance = "/cards/freeze_card?card=";
+  static const String unfreezeVirtualCardBalance = "/cards/unfreeze_card?card=";
+  static const String deleteVirtualCardBalance = "/cards/delete_card/";
+  static const String updateVirtualCardPin = "/cards/set_3d_secure_pin";
+
+
+
+
+
 
   //----recipients
   static const String recipientsListUrl = "/recipient-list";

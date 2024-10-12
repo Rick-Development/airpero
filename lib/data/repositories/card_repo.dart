@@ -16,12 +16,17 @@ class CardRepo {
     return await ApiClient.get(ENDPOINT_URL: AppConstants.cardTransaction+"/$id"+"?page=$page");
   }
 
-  static Future<http.Response> cardOrderSubmit(
-      {required Iterable<MultipartFile>? fileList,
-      required Map<String, String> fields}) async {
-    return await ApiClient.postMultipart(
-        ENDPOINT_URL: AppConstants.cardOrderFormSubmit,
-        fields:fields,fileList: fileList);
+  // static Future<http.Response> cardOrderSubmit(
+  //     {required Iterable<MultipartFile>? fileList,
+  //     required Map<String, String> fields}) async {
+  //   return await ApiClient.postMultipart(
+  //       ENDPOINT_URL: AppConstants.cardOrderFormSubmit,
+  //       fields:fields,fileList: fileList);
+  // }
+
+  static Future<void> cardOrderSubmit()async{
+
+
   }
 
   static Future<http.Response> cardOrderReSubmit(
@@ -31,7 +36,7 @@ class CardRepo {
         ENDPOINT_URL: AppConstants.cardOrderFormReSubmit,
         fields:fields,fileList: fileList);
   }
-  
+
   static Future<http.Response> blockCard(
       {required String id, required String reason}) async {
     return await ApiClient.post(

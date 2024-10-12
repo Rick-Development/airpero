@@ -10,6 +10,7 @@ class Keys {
   static String userPhoneCode = "userPhoneCode";
   static String isNewUser = "isNewUser";
   static String isRemember = "isRemember";
+  static String isBiometricOn = "isBiometricOn";
   static String channelName = "channelName";
   static String languageData = "languageData";
   static String baseCurrency = "baseCurrency";
