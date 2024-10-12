@@ -7,6 +7,7 @@ import '../../utils/services/localstorage/keys.dart';
 
 class ApiClient {
   static var BASE_URL = AppConstants.baseUrl;
+  static var BASE_URL_bridgecard = AppConstants.baseUrlBridgeCard;
 
   static Future<http.Response> get({required String ENDPOINT_URL}) async {
     var headers = {
@@ -104,4 +105,19 @@ class ApiClient {
     var responsedata = await http.Response.fromStream(response);
     return responsedata;
   }
+
+  static Future<http.Response> postRequestCard({required String ENDPOINT_URL}) async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${HiveHelp.read(Keys.token) ?? ''}',
+    };
+    var request = http.Request('DELETE', Uri.parse(BASE_URL + ENDPOINT_URL));
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    var responsedata = await http.Response.fromStream(response);
+    return responsedata;
+  }
+
+
+
 }

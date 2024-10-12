@@ -1,3 +1,5 @@
+import 'package:waiz/controllers/bridge_card_controller.dart';
+
 import '../money_request_controller.dart';
 import 'controller_index.dart';
 import '../add_recipient_controller.dart';
@@ -37,6 +39,7 @@ class InitBindings implements Bindings {
     Get.lazyPut<TransferHistoryController>(() => TransferHistoryController(),
         fenix: true);
     Get.lazyPut<CardController>(() => CardController(), fenix: true);
+    Get.lazyPut<BridgeCardController>(() => BridgeCardController(), fenix: true);
     Get.lazyPut<CardTransactionController>(() => CardTransactionController(),
         fenix: true);
     Get.lazyPut<WalletController>(() => WalletController(), fenix: true);

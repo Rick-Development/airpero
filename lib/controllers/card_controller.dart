@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +22,10 @@ class CardController extends GetxController {
   List<v.CardOrder> virtualCardFormList = [];
   String orderLock = "";
 
+  static const String _baseUrl =
+      "https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cardholder/register_cardholder_synchronously";
+
+  static const String _authToken = 'at_test_f1d330d748e8b92be0dbe4978cac304701071fc9faa3d9f08dac8f645135e36f7bac9c458dcc4ed68653af5baf201ecfe8e24fd9b1c981fbb6932401b3a061a8016995a0ee3712dd5dedb0d705a2b7de4c32de1fe99783a60fa2385b1a67fa328c9c3b0a43ac197ded9db3857b7a2de39e23a51d9b6aefbb740cfd64ed3aa9bd4486b9aa20c7f0fe96a6bfd638b662c2597277980202ee4ff2b3a1b43a84012cd1da2860248de647f2cd432ea852735d257d6261efb04de678318c8722e4d7b37a8e7384163789505938caff7dc769b369af4efd05a0209a2c6f16534446bf3a347a1549b11824344a370bc17129b4f55d1b582a6dd2982d92d565f005858035';
   Future getVirtualCards({bool? isFromRefreshIndicator = false}) async {
     if (isFromRefreshIndicator == false) {
       _isLoading = true;
@@ -188,29 +193,111 @@ class CardController extends GetxController {
   }
 
   bool isFormSubmtting = false;
-  Future cardOrderSubmit(
-      {required Iterable<http.MultipartFile>? fileList,
-      required Map<String, String> fields,
-      required BuildContext context}) async {
-    isFormSubmtting = true;
-    update();
-    http.Response response =
-        await CardRepo.cardOrderSubmit(fields: fields, fileList: fileList);
-    isFormSubmtting = false;
-    update();
 
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      ApiStatus.checkStatus(data['status'], data['message']);
-      if (data['status'] == "success") {
-        await getVirtualCards();
-        refreshData();
-        Navigator.pop(context);
+
+
+
+  // Future cardOrderSubmit(
+  //     {required Iterable<http.MultipartFile>? fileList,
+  //     required Map<String, String> fields,
+  //     required BuildContext context}) async {
+  //   isFormSubmtting = true;
+  //   update();
+  //   http.Response response =
+  //       await CardRepo.cardOrderSubmit(fields: fields, fileList: fileList);
+  //   isFormSubmtting = false;
+  //   update();
+  //
+  //   if (response.statusCode == 200) {
+  //     var data = jsonDecode(response.body);
+  //     ApiStatus.checkStatus(data['status'], data['message']);
+  //     if (data['status'] == "success") {
+  //       await getVirtualCards();
+  //       refreshData();
+  //       Navigator.pop(context);
+  //     }
+  //   } else {
+  //     ApiStatus.checkStatus("error", "Something went wrong!");
+  //   }
+  // }
+
+
+  Future<void> registerCardholder() async {
+    // API URL
+    String url = "https://issuecards.api.bridgecard.co/v1/issuing/sandbox/cardholder/register_cardholder_synchronously";
+
+    // Request body as a JSON payload
+    Map<String, dynamic> payload = {
+      "first_name": "John",
+      "last_name": "Doe",
+      "address": {
+        "address": "9 Jibowu Street",
+        "city": "Aba North",
+        "state": "Abia",
+        "country": "Nigeria",
+        "postal_code": "1000242",
+        "house_no": "13"
+      },
+      "phone": "08122277789",
+      "email_address": "testingboy@gmail.com",
+      "identity": {
+        "id_type": "NIGERIAN_BVN_VERIFICATION",
+        "bvn": "12345678902",
+        "selfie_image": "https://image.com"
+      },
+      "meta_data": {"Secret Key": "any_value"}
+    };
+
+    // Headers
+    Map<String, String> headers = {
+      'token': 'Bearer $_authToken',  // Replace with your token
+      'Content-Type': 'application/json'
+    };
+
+    try {
+      // Making the POST request
+      http.Response response = await http.post(
+        Uri.parse(_baseUrl),
+        headers: headers,
+        body: jsonEncode(payload), // Encode the payload to JSON
+      );
+
+      // Log response for debugging
+      log('Response status: ${response.statusCode}');
+      log('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        // Handle the successful response
+        log("Cardholder registered successfully: $data");
+        // You can call a function here to handle the API response, e.g., show success dialog or update state
+      } else {
+        // Handle errors
+        log("Error: ${response.statusCode}");
+        log("Error Body: ${response.body}");
       }
-    } else {
-      ApiStatus.checkStatus("error", "Something went wrong!");
+    } catch (e) {
+      // Handle any other errors, such as network issues
+      log('An error occurred: $e');
     }
   }
+
+
+  // Future BridgeCardOrderSubmit() async {
+  //   isFormSubmtting = true;
+  //   update();
+  //   http.Response response =
+  //       await CardRepo.cardOrderReSubmit(fields: fields, fileList: fileList);
+  //   isFormSubmtting = false;
+  //   update();
+  //   if(response.statusCode==200){
+  //     var data=jsonDecode(response.body);
+  //     log("data from BridgeCardOrderSubmit $data");
+  //     ApiStatus.checkStatus(data['status'], data['message']);
+  //   }else {
+  //     ApiStatus.checkStatus("error", "Something went wrong!");
+  //   }
+  // }
 
   Future cardOrderReSubmit(
       {required Iterable<http.MultipartFile>? fileList,

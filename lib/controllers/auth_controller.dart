@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:waiz/data/repositories/auth_repo.dart';
 import 'package:waiz/data/source/check_status.dart';
 import 'package:waiz/utils/services/helpers.dart';
@@ -22,6 +23,107 @@ class AuthController extends GetxController {
   String userNameVal = "";
   String singInPassVal = "";
   bool isRemember = false;
+  bool isBiometricOn = false;
+
+  @override
+  void onReady() {
+    super.onReady();
+    checkBiometrics();
+    hasSavedCredentials();
+    checkBiometricOn();
+    // Check biometrics availability on ready
+  }
+
+  void removeSavedCredentials() {
+    HiveHelp.remove(Keys.userName);
+    HiveHelp.remove(Keys.userPass);
+    HiveHelp.remove(Keys.isBiometricOn);
+    userNameEditingController.clear();
+    signInPassEditingController.clear();
+    userNameVal = '';
+    singInPassVal = '';
+  }
+
+  final LocalAuthentication auth = LocalAuthentication();
+  bool isBiometricSupported = false;
+  bool isFaceID = false;
+  bool isFingerprint = false;
+
+  // Check for biometrics support
+  Future<void> checkBiometrics() async {
+    try {
+      isBiometricSupported = await auth.canCheckBiometrics;
+      List<BiometricType> availableBiometrics = await auth.getAvailableBiometrics();
+
+      if (availableBiometrics.contains(BiometricType.face)) {
+        isFaceID = true;
+      } else if (availableBiometrics.contains(BiometricType.fingerprint)) {
+        isFingerprint = true;
+      }
+    } catch (e) {
+      isBiometricSupported = false;
+    }
+    update();
+  }
+
+  // Authenticate with biometrics
+  Future<bool> authenticateWithBiometrics() async {
+    bool authenticated = false;
+    try {
+      authenticated = await auth.authenticate(
+        localizedReason: 'Please authenticate to log in',
+          options: const AuthenticationOptions(biometricOnly: true,stickyAuth: true,useErrorDialogs: true));
+    } catch (e) {
+      // Handle error
+    }
+    return authenticated;
+  }
+
+  // Call this function to login using biometrics
+  Future<void> loginWithBiometrics() async {
+    bool authenticated = await authenticateWithBiometrics();
+    try{
+      if (authenticated) {
+        // Retrieve the saved username and password from Hive or local storage
+        String? savedUsername = HiveHelp.read(Keys.userName);
+        String? savedPassword = HiveHelp.read(Keys.userPass);
+
+        if (savedUsername != null && savedPassword != null) {
+          userNameEditingController.text = savedUsername;
+          // signInPassEditingController.text = savedPassword;
+          userNameVal = savedUsername;
+          singInPassVal = savedPassword;
+          // Perform the login logic with saved credentials
+          await login();
+        }
+      }
+
+    }catch(e){
+      if (e.toString().contains('locked out')) {
+        // Handle lockout by disabling biometrics
+        isBiometricOn = false;
+        Get.snackbar("Biometric Lockout", "Too many failed attempts. Please use your password.");
+      } else {
+        // Handle other biometric-related errors
+        Get.snackbar("Authentication Error", "Biometric authentication failed. Please try again.");
+      }
+    }
+  }
+
+
+
+  // Check if saved credentials exist
+  bool hasSavedCredentials() {
+    return HiveHelp.read(Keys.userName) != null && HiveHelp.read(Keys.userPass) != null;
+  }
+
+  checkBiometricOn(){
+    if (HiveHelp.read(Keys.isBiometricOn) != null) {
+      isBiometricOn = HiveHelp.read(Keys.isBiometricOn);
+      update();
+    }
+  }
+
 
   clearSignInController() {
     userNameEditingController.clear();
@@ -45,9 +147,14 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       if (data['status'] == 'success') {
         ApiStatus.checkStatus(data['status'], data['message']['message']);
-        if (isRemember == true) {
+        if (isRemember == true ) {
           HiveHelp.write(Keys.userName, userNameVal);
           HiveHelp.write(Keys.userPass, singInPassVal);
+        }if (isBiometricOn == true ) {
+          HiveHelp.write(Keys.userName, userNameVal);
+          HiveHelp.write(Keys.userPass, singInPassVal);
+        }if(isBiometricOn==false){
+          removeSavedCredentials();
         }
         HiveHelp.write(Keys.token, data['message']['token']);
         Get.offAllNamed(RoutesName.bottomNavBar);

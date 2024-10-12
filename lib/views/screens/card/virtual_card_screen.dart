@@ -175,7 +175,7 @@ class VirtualCardScreen extends StatelessWidget {
                                                                           Get.back();
                                                                           if (cardCtrl.virtualCardFormList[0].resubmitted.toString() ==
                                                                               "1") {
-                                                                            cardCtrl.getVirtualCards();
+                                                                            // cardCtrl.getVirtualCards();
                                                                             Get.to(() =>
                                                                                 VirtualCardFormScreen(isFromResubmit: true));
                                                                           }
